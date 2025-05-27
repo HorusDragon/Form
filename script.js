@@ -54,7 +54,7 @@ document.getElementById("pedidoForm").addEventListener("submit", function (e) {
     `Billetes: ${billetes}\n` +
     (frase ? `Cinta: \"${frase}\"\n` : "");
 
-  const telefono = "520000000000"; // número sin +
+  const telefono = "525583303362"; // número sin +
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 });
