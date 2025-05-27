@@ -57,4 +57,10 @@ document.getElementById("pedidoForm").addEventListener("submit", function (e) {
   const telefono = "525583303362"; // número sin +
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
+
+        <!--Confirmation--> 
+      <h1>Confirmar Asistencia</h1>
+      <div class="container" id="confirmation">
+        <a href="https://api.whatsapp.com/send?phone=525583303362&text=Hola%2C+Confirmo+mi+asistencia%21%21%21" class="button-whatsapp">Confirmar</a>
+      </div>
 });
