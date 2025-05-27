@@ -1,11 +1,10 @@
 function mostrarColores() {
-  const tipo = document.getElementById("tipoRamo").value;
+  const tipo = parseInt(document.getElementById("tipoRamo").value);
   const container = document.getElementById("coloresContainer");
   container.innerHTML = "";
   const colores = ["rojo", "blanco", "rosa"];
   for (let i = 1; i <= tipo; i++) {
     const select = document.createElement("select");
-    select.name = `color${i}`;
     select.id = `color${i}`;
     colores.forEach(color => {
       const option = document.createElement("option");
@@ -20,47 +19,42 @@ function mostrarColores() {
 }
 
 function mostrarBilletes() {
-  document.getElementById("billetesOpciones").style.display =
-    document.getElementById("billetesCheck").checked ? "block" : "none";
+  const visible = document.getElementById("billetesCheck").checked;
+  document.getElementById("billetesOpciones").style.display = visible ? "block" : "none";
 }
 
 function mostrarFrase() {
-  document.getElementById("frase").style.display =
-    document.getElementById("cinta").value === "si" ? "inline" : "none";
+  const visible = document.getElementById("cinta").value === "si";
+  document.getElementById("frase").style.display = visible ? "inline" : "none";
 }
 
 document.getElementById("pedidoForm").addEventListener("submit", function (e) {
   e.preventDefault();
+
   const cantidad = document.getElementById("cantidad").value;
-  const tipoRamo = document.getElementById("tipoRamo").value;
+  const tipoRamo = parseInt(document.getElementById("tipoRamo").value);
 
   const colores = [];
   for (let i = 1; i <= tipoRamo; i++) {
-    colores.push(document.getElementById(`color${i}`).value);
+    const color = document.getElementById(`color${i}`);
+    if (color) {
+      colores.push(color.value);
+    }
   }
 
   const girasol = document.getElementById("girasol").checked ? "Sí" : "No";
-
-  const billetesActivado = document.getElementById("billetesCheck").checked;
-  const billetes = billetesActivado ? document.getElementById("billetes").value : "No";
-
+  const billetesCheck = document.getElementById("billetesCheck").checked;
+  const billetes = billetesCheck ? document.getElementById("billetes").value : "No";
   const cinta = document.getElementById("cinta").value;
   const frase = cinta === "si" ? document.getElementById("frase").value : "";
 
-  const mensaje =
-    `Hola, quiero pedir un ramo de ${cantidad} rosas.\n` +
-    `Tipo de ramo: ${tipoRamo} colores (${colores.join(", ")})\n` +
-    `Girasol: ${girasol}\n` +
-    `Billetes: ${billetes}\n` +
-    (frase ? `Cinta: \"${frase}\"\n` : "");
+  const mensaje = `Hola, quiero pedir un ramo de ${cantidad} rosas.\n` +
+                  `Tipo de ramo: ${tipoRamo} colores (${colores.join(", ")})\n` +
+                  `Girasol: ${girasol}\n` +
+                  `Billetes: ${billetes}\n` +
+                  (frase ? `Cinta: "${frase}"\n` : "");
 
-  const telefono = "525583303362"; // número sin +
+  const telefono = "525583303362"; // <-- Cambia este número
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
-
-        <!--Confirmation--> 
-      <h1>Confirmar Asistencia</h1>
-      <div class="container" id="confirmation">
-        <a href="https://api.whatsapp.com/send?phone=525583303362&text=Hola%2C+Confirmo+mi+asistencia%21%21%21" class="button-whatsapp">Confirmar</a>
-      </div>
 });
