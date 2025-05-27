@@ -55,6 +55,6 @@ document.getElementById("pedidoForm").addEventListener("submit", function (e) {
                   (frase ? `Cinta: "${frase}"\n` : "");
 
   const telefono = "525583303362"; // <-- Cambia este número
-  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, "_blank");
+const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+window.location.href = url; // Funciona mejor en móviles
 });
